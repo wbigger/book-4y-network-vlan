@@ -1,4 +1,4 @@
-# Benvenuti alle dispense di TPSI - Architettura del progetto
+# Benvenuti alle dispense di Sistemi e Reti - VLAN
 
 In queste dispense vedremo come simulare una rete scolastica sia con Packet Tracer sia nella pratica con Raspberry PI e switch reali.
 
