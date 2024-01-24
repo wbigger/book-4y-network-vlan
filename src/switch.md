@@ -43,7 +43,7 @@ Assegniamo ora le VLAN alle porte. Nel nostro caso, vogliamo la seguente situazi
 |FastEthernet 0/1|Studenti|
 |FastEthernet 0/2|Studenti|
 |FastEthernet 0/3|Docenti|
-|FastEthernet 0/4|Server DHCP|
+|GigabitEthernet 0/1|Server DHCP|
 
 
 ```bash
@@ -60,7 +60,7 @@ Switch(config-if)#switchport access vlan 10
 Ora dobbiamo configurare la porta che va verso il server DHCP. Da questa porta deve poter passare il traffico di diverse VLAN, si dice quindi in questo caso che è una _porta di trunk_.
 
 ```bash
-Switch(config)#interface FastEthernet 0/4
+Switch(config)#interface GigabitEthernet 0/1
 Switch(config-if)#switchport mode trunk
 Switch(config-if)#exit
 Switch(config)#
