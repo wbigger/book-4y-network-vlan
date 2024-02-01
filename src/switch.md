@@ -45,7 +45,6 @@ Assegniamo ora le VLAN alle porte. Nel nostro caso, vogliamo la seguente situazi
 |FastEthernet 0/3|Docenti|
 |GigabitEthernet 0/1|Server DHCP|
 
-
 ```bash
 Switch(config)#interface FastEthernet 0/1
 Switch(config-if)#switchport access vlan 20
@@ -66,10 +65,51 @@ Switch(config-if)#exit
 Switch(config)#
 ```
 
-## Prossimi passi
+## Configurare il server DHCP
 
-- configurare il server DHCP
-- assegnare un IP alle VLAN
-- configurare il router
+```bash
+Switch(config)#ip dhcp excluded-address 10.0.0.1 10.0.0.10
+Switch(config)#ip dhcp excluded-address 10.1.0.1 10.1.0.10
+Switch(config)#ip dhcp pool vPool10
+Switch(dhcp-config)#network 10.0.0.0 255.255.255.0
+Switch(dhcp-config)#default-router 10.0.0.1
+Switch(dhcp-config)#dns-server 4.4.4.4
+Switch(dhcp-config)#exit
+Switch(config)#ip dhcp pool vPool20
+Switch(dhcp-config)#network 10.1.0.0 255.255.0.0
+Switch(dhcp-config)# default-router 10.1.0.1
+Switch(dhcp-config)# dns-server 4.4.4.4
+Switch(dhcp-config)#exit
+Switch(config)#
+```
 
-Tutorial ispirato da [qui](https://www.computernetworkingnotes.com/ccna-study-guide/configure-dhcp-server-for-multiple-vlans-on-the-switch.html).
+## Assegnazione indirizzi IP
+
+```bash
+interface vlan 10
+ip address 10.0.0.5 255.255.255.0
+interface vlan 20
+ip address 10.1.0.5 255.255.0.0
+```
+
+## Configurazione router
+
+```bash
+Router>enable
+Router#configure terminal
+Router(config)#interface GigabitEthernet 6/0
+Router(config-if)#no ip address
+Router(config-if)#no shutdown
+Router(config-if)#exit
+Router(config)#interface GigabitEthernet 6/0.10
+Router(config-subif)#encapsulation dot1Q 10
+Router(config-subif)#ip address 10.0.0.1 255.255.255.0
+Router(config-subif)#exit
+Router(config)#interface GigabitEthernet 6/0.20
+Router(config-subif)#encapsulation dot1Q 20
+Router(config-subif)#ip address 20.0.0.1 255.255.0.0
+Router(config-subif)#exit
+Router(config)#
+```
+
+[Credits](https://www.computernetworkingnotes.com/ccna-study-guide/configure-dhcp-server-for-multiple-vlans-on-the-switch.html).
