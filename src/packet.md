@@ -18,7 +18,7 @@ Le connessioni Ethernet devono essere come segue:
 |FastEthernet 0/1|Raspberry 1 (access point 1)|
 |FastEthernet 0/2|Raspberry 2 (access point 2)|
 |FastEthernet 0/3|Raspberry 3 (access point 3)|
-|FastEthernet 0/4|Server DHCP|
+|GigabitEthernet 6/0|Router|
 |Seriale RS-232|Laptop di configurazione|
 
 
