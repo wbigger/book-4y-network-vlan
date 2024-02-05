@@ -43,7 +43,7 @@ Assegniamo ora le VLAN alle porte. Nel nostro caso, vogliamo la seguente situazi
 |FastEthernet 0/1|Studenti|
 |FastEthernet 0/2|Studenti|
 |FastEthernet 0/3|Docenti|
-|GigabitEthernet 0/1|Server DHCP|
+|GigabitEthernet 6/0|Router|
 
 ```bash
 Switch(config)#interface FastEthernet 0/1
